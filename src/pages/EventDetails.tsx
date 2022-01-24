@@ -1,7 +1,8 @@
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { Card, Row, Col } from 'antd';
+import { format } from 'date-fns';
 
-import Sidebar from '../components/Sidebar';
 import fetchEventDetails from '../queries/eventDetails';
 
 const EventDetails = () => {
@@ -19,9 +20,20 @@ const EventDetails = () => {
   if (popularEvents.isSuccess) {
     return (
       <>
-        <Sidebar />
         {popularEvents.data.events.map((event) => (
-          <div>{event.name}</div>
+          <Row>
+            <Col span={24}>
+              <Card title={event.name} key={event.id}>
+                <div> {event.description}</div>
+                <div>
+                  Updated:
+                  {format(new Date(event.modified), 'do MMMM yyyy, hh:mm aaaa')}
+                </div>
+                <div>Status: {event.state}</div>
+                {event.type && <div>{event.type.domain}</div>}
+              </Card>
+            </Col>
+          </Row>
         ))}
       </>
     );

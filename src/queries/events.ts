@@ -1,6 +1,9 @@
 type EventResponse = {
   id: string;
   name: string;
+  description: string;
+  start_datetime: string;
+  state: string;
 };
 
 type EventsResponse = {
@@ -9,7 +12,7 @@ type EventsResponse = {
 
 const fetchEvents = async () => {
   const response = await fetch(
-    `https://cors-anywhere.herokuapp.com/api.smarkets.com/v3/events/?state=new&state=upcoming&state=live&with_new_type=true&limit=20&include_hidden=false`
+    `/.netlify/functions/bypass-cors?url=https://api.smarkets.com/v3/events/?state=new&state=upcoming&state=live&with_new_type=true&limit=20&include_hidden=false`
   );
   const jsonResponse = (await response.json()) as Promise<EventsResponse>;
   return jsonResponse;

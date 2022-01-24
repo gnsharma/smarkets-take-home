@@ -14,9 +14,12 @@ const Sidebar = () => {
       dataSource={SPORTS}
       renderItem={(item) => (
         <List.Item>
-          <Link to={`/${item.id}`}>{item.name}</Link>
+          <Link to={`/${item.id}`} style={{ color: 'white', paddingLeft: 20 }}>
+            {item.name}
+          </Link>
         </List.Item>
       )}
+      style={{ paddingTop: 20 }}
     />
   );
 };

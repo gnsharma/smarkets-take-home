@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import App from './App';
 import Home from './pages/Home';
 import Events from './pages/Events';
 import EventDetails from './pages/EventDetails';
 
-import './index.less';
-
 import reportWebVitals from './reportWebVitals';
+
+import './index.less';
 
 const queryClient = new QueryClient();
 
@@ -18,9 +19,11 @@ ReactDOM.render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/:sportName" element={<Events />} />
-          <Route path="/events/:eventId" element={<EventDetails />} />
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="/:sportName" element={<Events />} />
+            <Route path="/events/:eventId" element={<EventDetails />} />
+          </Route>
         </Routes>
       </QueryClientProvider>
     </BrowserRouter>
